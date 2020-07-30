@@ -1,4 +1,19 @@
 body {
-    font: 14px "Century Gothic", Futura, sans-serif;
-    margin: 20px;
+    font: 24px "Century Gothic", Futura, sans-serif;
+    margin: 40px;
+    color: red;
+    background-color: #313639;
+}
+
+/* Placeholder for formatting later */
+.pilots-list {
+    list-style-type: none;
+    text-transform: uppercase;
+}
+
+.clock-display {
+    display: inline-block;
+    padding: 0px 10px 0px 10px;
+    margin: 10px 10px 10px 0px;
+    border: 2px solid red;
 }

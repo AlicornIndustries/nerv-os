@@ -2,7 +2,7 @@ export class Pilot {
     constructor(firstName, lastName, idCode) {
         this._firstName = firstName;
         this._lastName = lastName;
-        this._idCode = idCode;
+        this._idCode = idCode; // idCodes are not necessarily numeric
         this._physicalHealthMax = 100;
         this._physicalHealthCurrent = this._physicalHealthMax;
         this._mentalHealthMax = 100;
@@ -10,6 +10,9 @@ export class Pilot {
     }
     get fullName() {
         return this._firstName + " " + this._lastName;
+    }
+    get fullNameReverse() {
+        return this._lastName + ", " + this._firstName;
     }
 }
 

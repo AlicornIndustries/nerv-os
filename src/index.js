@@ -2,6 +2,8 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import { Pilot } from './assets/pilot.js';
+import './clock.js';
+import Clock from './clock.js';
 
 // function PilotDisplay(props) {
 //     return (
@@ -15,15 +17,26 @@ class Game extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            pilots: []
+            pilots: {}
         }
-        this.createPilot("Shinji","Ikari","3");
-        this.createPilot("Rei","Ayanami","1");
+    }
+    componentDidMount() {
+        this.createPilot("Shinji","Ikari",3);
+        this.createPilot("Rei","Ayanami",1);
         console.table(this.state.pilots);
     }
     createPilot(firstName,lastName,idCode) {
-        // TODO: check to prevent id collisions
-        this.state.pilots.push(new Pilot(firstName,lastName,idCode));
+        // Check to prevent id collisions
+        if(this.state.pilots[idCode] != null) {
+            console.log("Tried to create a pilot with pre-existing id code " + idCode.toString());
+            return;
+        }
+        // TODO: Still probably not a very good way to do it.
+        // https://stackoverflow.com/questions/35174489/reactjs-setstate-of-object-key-in-array/35174579
+        // Without mutation:        
+        var stateCopy = Object.assign({}, this.state);
+        stateCopy.pilots[idCode] = new Pilot(firstName,lastName,idCode);
+        this.setState(stateCopy);
     }
     // renderPilotDisplay(i) {
     //     return (
@@ -32,45 +45,21 @@ class Game extends React.Component {
     //         />);
     // }
     render() {
-        const listItems = this.state.pilots.map((pilot) =>
-            <li key={pilot._idCode}>{pilot.fullName}</li>
-            );
-        return <ul>{listItems}</ul>
+        // NB: May need to add !.hasOwnPropertyKey(key) later
+        // Format list of pilots. FUTURE: Is there a better way to do this with some map() witchcraft?
+        let listItems = [];
+        for(var idCode in this.state.pilots) {
+            listItems.push(<li key={idCode}>{this.state.pilots[idCode].fullNameReverse}</li> );
+        }
+        return (
+            <div>
+                <Clock />
+                <div className="pilots-list">{listItems}</div>
+            </div>
+            )
 
-        // return (
-        //     <div>
-        //         {this.renderPilotDisplay(0)}
-        //         {this.renderPilotDisplay(1)}
-        //     </div>
-        // );
-        // const data = [{"name":"test1"},{"name":"test2"}];
-        // const listItems = data.map((d) => <li key={d.name}>{d.name}</li>)
-        // return (
-        //     <div className="pilotsList">
-        //         {listItems}
-        //     </div>
-        // )
     }
 }
-
-// class Display extends React.Component {
-//     constructor(props) {
-//         super(props);
-//         this.state = {
-//             pilots: []
-//         }
-//     }
-//     render() {
-//         let testPilot = new Pilot("Shinji","Ikari");
-//         console.log(testPilot.fullName);
-
-
-
-//         return(
-//             <div className="game">TEST</div>
-//         )
-//     }
-// }
 
 // ========================================
 
