@@ -40,19 +40,28 @@ body {
     border: 2px solid red; */
 }
 
-/* https://stackoverflow.com/questions/45799207/how-to-make-css-grid-items-take-up-remaining-space */
-.gridWrapper {
+.grid-container {
     display: grid;
-    /* grid-template-columns: 1fr 1fr min-content; */
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 }
 
 grid-item {
     display: flex;
     align-items: center;
     justify-content: center;
-    color:green;
 }
+
+/* grid-item-left {
+    display: flex;
+    align-items: center;
+    justify-content: left;
+}
+
+grid-item-right {
+    display: flex;
+    align-items: center;
+    justify-content: right;
+} */
 
 /* #topPanel {
     display: flex;

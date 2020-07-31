@@ -18,6 +18,7 @@ export class Agency {
     addFunds(amount) {
         this._funds += amount;
     }
+    getFunds() {return this._funds;}
     createPilot(firstName, lastName, idCode) {
         // Check if idCode is already used
         if(this._pilots[idCode] != null) {

@@ -7,7 +7,7 @@ export class Game {
         // Initialize
         this._agency = new Agency('NERV');
         this._time = new Date(968857200000); // Sept 13, 2000
-        this._timeFactor = 100;
+        this._timeFactor = 10;
     }
     advanceTime(ms) {
         // Advance game time by real time amount of milliseconds

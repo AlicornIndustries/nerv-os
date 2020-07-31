@@ -53,16 +53,15 @@ class Display extends React.Component {
         }
         return (
             <div>
-                <div id="topPanel" className='gridWrapper glowing-text'>
+                <div id="topPanel" className='grid-container glowing-text'>
                     <grid-item>Lorem ipsum</grid-item>
                     <grid-item>
                         <Clock time={this.state.game.getTime()}/>
                     </grid-item>
                     <grid-item>
-                        <FinancesDisplay />
+                        <FinancesDisplay funds={this.state.game.getAgency().getFunds()}/>
                     </grid-item>
                 </div>
-
                 <div className="pilots-list glowing-text">{listItems}</div>
             </div>
             )
