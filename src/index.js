@@ -1,9 +1,8 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import { Pilot } from './assets/pilot.js';
-import './clock.js';
 import Clock from './clock.js';
+import Game from './assets/game.js';
 
 // function PilotDisplay(props) {
 //     return (
@@ -13,47 +12,43 @@ import Clock from './clock.js';
 //     )
 // }
 
-class Game extends React.Component {
+
+
+class Display extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-            pilots: {}
+            game: new Game(),
+            refreshRate: 50
         }
     }
     componentDidMount() {
-        this.createPilot("Shinji","Ikari",3);
-        this.createPilot("Rei","Ayanami",1);
-        console.table(this.state.pilots);
+        // Refresh at intervals
+        this.intervalID = setInterval(
+            () => this.tick(), this.state.refreshRate
+        );
     }
-    createPilot(firstName,lastName,idCode) {
-        // Check to prevent id collisions
-        if(this.state.pilots[idCode] != null) {
-            console.log("Tried to create a pilot with pre-existing id code " + idCode.toString());
-            return;
-        }
-        // TODO: Still probably not a very good way to do it.
-        // https://stackoverflow.com/questions/35174489/reactjs-setstate-of-object-key-in-array/35174579
-        // Without mutation:        
-        var stateCopy = Object.assign({}, this.state);
-        stateCopy.pilots[idCode] = new Pilot(firstName,lastName,idCode);
-        this.setState(stateCopy);
+    componentWillUnmount() {
+        clearInterval(this.intervalID);
     }
-    // renderPilotDisplay(i) {
-    //     return (
-    //         <PilotDisplay
-    //             name="test"
-    //         />);
-    // }
+    tick() {
+        // Update the game based on delta-time
+        this.state.game.advanceTime(this.state.refreshRate);
+        // Change state to itself to re-render
+        this.setState({state: this.state});
+    }
+    // TODO: Need to re-render clock. Probably set it up with its own State, so React knows when to render it.
     render() {
         // NB: May need to add !.hasOwnPropertyKey(key) later
         // Format list of pilots. FUTURE: Is there a better way to do this with some map() witchcraft?
         let listItems = [];
-        for(var idCode in this.state.pilots) {
-            listItems.push(<li key={idCode}>{this.state.pilots[idCode].fullNameReverse}</li> );
+
+        for(var idCode in this.state.game.getPilots()) {
+            listItems.push(<li key={idCode}>{this.state.game.getPilots()[idCode].fullNameReverse}</li>)
         }
         return (
             <div>
-                <Clock />
+                <Clock time={this.state.game.getTime()}/>
                 <div className="pilots-list">{listItems}</div>
             </div>
             )
@@ -64,6 +59,6 @@ class Game extends React.Component {
 // ========================================
 
 ReactDOM.render(
-    <Game />,
+    <Display />,
     document.getElementById("root")
 );
