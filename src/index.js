@@ -12,8 +12,6 @@ import Game from './assets/game.js';
 //     )
 // }
 
-
-
 class Display extends React.Component {
     constructor(props) {
         super(props);
