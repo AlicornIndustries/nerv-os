@@ -1,23 +1,60 @@
 body {
     font: 24px "Century Gothic", Futura, sans-serif;
     margin: 40px;
-    color: red;
-    background-color: #313639;
+    color: #f05c66;
+    background-color: #333333;
 }
 
 /* Placeholder for formatting later */
 .pilots-list {
     list-style-type: none;
     text-transform: uppercase;
+
+    margin: 0 auto;
+    width: 40%;
+    padding: 3px;
+    text-align: left;
+    border: 2px solid #f05c66;
 }
 
-.clock-face {
+.glowing-text {
+    text-shadow: 1px 1px 3px;
+}
+
+
+
+/* .rowified {
+    display: flex;
+    flex-direction: row;
+} */
+
+#clock-face {
     margin: 0 auto;
     width: 20%;
     text-align: center;
-
+    color: #5ffffc;
+    border: 2px solid red;
     /* display: inline-block;
     padding: 0px 10px 0px 10px;
     margin: 10px 10px 10px 0px;
     border: 2px solid red; */
 }
+
+/* https://stackoverflow.com/questions/45799207/how-to-make-css-grid-items-take-up-remaining-space */
+.gridWrapper {
+    display: grid;
+    /* grid-template-columns: 1fr 1fr min-content; */
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+grid-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color:green;
+}
+
+/* #topPanel {
+    display: flex;
+    justify-content: space-between;
+} */

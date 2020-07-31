@@ -2,6 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Clock from './clock.js';
+import FinancesDisplay from './financesDisplay.js';
 import Game from './assets/game.js';
 
 // function PilotDisplay(props) {
@@ -41,13 +42,28 @@ class Display extends React.Component {
         // Format list of pilots. FUTURE: Is there a better way to do this with some map() witchcraft?
         let listItems = [];
 
-        for(var idCode in this.state.game.getPilots()) {
-            listItems.push(<li key={idCode}>{this.state.game.getPilots()[idCode].fullNameReverse}</li>)
+        // TODO: Replace with cleaner table?
+        for(var idCode in this.state.game.getAgency().getPilots()) {
+            let pilot = this.state.game.getAgency().getPilots()[idCode];
+            listItems.push(<li key={idCode}>{pilot.fullNameReverse}
+                <span style={{float:'right'}}>
+                    {pilot.healthString}
+                </span>            
+            </li>)
         }
         return (
             <div>
-                <Clock time={this.state.game.getTime()}/>
-                <div className="pilots-list">{listItems}</div>
+                <div id="topPanel" className='gridWrapper glowing-text'>
+                    <grid-item>Lorem ipsum</grid-item>
+                    <grid-item>
+                        <Clock time={this.state.game.getTime()}/>
+                    </grid-item>
+                    <grid-item>
+                        <FinancesDisplay />
+                    </grid-item>
+                </div>
+
+                <div className="pilots-list glowing-text">{listItems}</div>
             </div>
             )
 

@@ -14,8 +14,7 @@ export class Pilot {
     get fullNameReverse() {
         return this._lastName + ", " + this._firstName;
     }
-}
-
-export function testFunc() {
-    return "success!";
+    get healthString() {
+        return this._physicalHealthCurrent.toString() + ':' + this._mentalHealthCurrent.toString();
+    }
 }

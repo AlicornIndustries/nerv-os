@@ -1,53 +1,26 @@
-import { Pilot } from "./pilot.js";
+import { Agency } from "./agency.js";
 
-// game object knows what time it is. game updates using React's setInterval system, passed in by index.js
-
-// export var Game = {
-//     _pilots: {},
-//     init: function() {
-//         this.createPilot("Shinji","Ikari",3);
-//         this.createPilot("Rei","Ayanami",1);
-//     },
-//     // FUTURE: Move this to Agency (NERV, etc)
-//     createPilot: function(firstName,lastName,idCode) {
-//         // Check if idCode is already used
-//         if(this._pilots[idCode] != null) {
-//             console.log("Tried to create a pilot with pre-existing id code " + idCode.toString());
-//             return;
-//         } else {
-//             this._pilots[idCode] = new Pilot(firstName,lastName,idCode);
-//         }
-
-//     }
-// }
+// game object updates using React's setInterval system, passed in by index.js
 
 export class Game {
     constructor() {
         // Initialize
-        this._pilots = {};
+        this._agency = new Agency('NERV');
         this._time = new Date(968857200000); // Sept 13, 2000
-        this._timeFactor = 5;
-        // Setup testing variables
-        this.createPilot("Shinji","Ikari",3);
-        this.createPilot("Rei","Ayanami",1);
-        this.createPilot("Asuka","Soryu",2);
+        this._timeFactor = 100;
     }
     advanceTime(ms) {
         // Advance game time by real time amount of milliseconds
+        // Save the previous month to see if a month has passed
+        const previousMonth = this._time.getMonth();
         this._time.setTime(this._time.getTime()+(ms*this._timeFactor));
-        //console.log(this._time.toLocaleString())
-    }
-    createPilot(firstName, lastName, idCode) {
-        // Check if idCode is already used
-        if(this._pilots[idCode] != null) {
-            console.log("Tried to create a pilot with pre-existing id code " + idCode.toString());
-            return;
-        } else {
-            this._pilots[idCode] = new Pilot(firstName,lastName,idCode);
+        if(this._time.getMonth() !== previousMonth) {
+            console.log("Month elapsed.");
+            this._agency.monthlyUpdate();
         }
 
     }
-    getPilots() {return this._pilots;}
+    getAgency() {return this._agency;}
     getTime() {return this._time;}
 }
 
