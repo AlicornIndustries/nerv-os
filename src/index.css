@@ -5,28 +5,9 @@ body {
     background-color: #333333;
 }
 
-/* Placeholder for formatting later */
-.pilots-list {
-    list-style-type: none;
-    text-transform: uppercase;
-
-    margin: 0 auto;
-    width: 40%;
-    padding: 3px;
-    text-align: left;
-    border: 2px solid #f05c66;
-}
-
 .glowing-text {
     text-shadow: 1px 1px 3px;
 }
-
-
-
-/* .rowified {
-    display: flex;
-    flex-direction: row;
-} */
 
 #clock-face {
     margin: 0 auto;
@@ -40,14 +21,38 @@ body {
     border: 2px solid red; */
 }
 
+/* Placeholder for formatting later */
+#pilots-list {
+    list-style-type: none;
+    text-transform: uppercase;
+
+    margin: 0 auto;
+    width: 100%;
+    padding: 2px;
+    text-align: left;
+    border: 2px solid #f05c66;
+}
+
+#garage-display {
+    list-style-type: none;
+    text-transform: uppercase;
+
+    margin: 0 auto;
+    width: 100%;
+    padding: 2px;
+    text-align: left;
+    border: 2px solid #f05c66;
+}
+
 .grid-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+    grid-gap: 10px 10px;
 }
 
 grid-item {
     display: flex;
-    align-items: center;
+    align-items: top;
     justify-content: center;
 }
 

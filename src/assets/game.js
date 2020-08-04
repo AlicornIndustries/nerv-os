@@ -20,8 +20,8 @@ export class Game {
         }
 
     }
-    getAgency() {return this._agency;}
-    getTime() {return this._time;}
+    get agency() {return this._agency;}
+    get time() {return this._time;}
 }
 
 export default Game;
