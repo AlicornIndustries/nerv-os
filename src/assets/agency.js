@@ -14,6 +14,7 @@ export class Agency {
         this.createPilot("Asuka","Soryu",2);
         this.createMecha("Unit 00",'light','ABC');
         this.createMecha("Unit 01",'heavy','DEF');
+        this._mechas['ABC'].setPilot(this._pilots[3]);
     }
     get name() {return this._name;}
     get pilots() {return this._pilots;}

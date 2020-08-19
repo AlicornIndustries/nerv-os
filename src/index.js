@@ -44,16 +44,11 @@ class Display extends React.Component {
         // Change state to itself to re-render
         this.setState({state: this.state});
     }
-    renderGarageDisplay(idCode) {
-        return(
-            <GarageDisplay mecha={this.state.game.agency.mechas[idCode]}/>
-        )
-    }
-
-
-
-
-
+    // renderGarageDisplay(idCode) {
+    //     return(
+    //         <GarageDisplay mecha={this.state.game.agency.mechas[idCode]}/>
+    //     )
+    // }
     render() {
         // NB: May need to add !.hasOwnPropertyKey(key) later
         // Format list of pilots. FUTURE: Is there a better way to do this with some map() witchcraft?
@@ -82,21 +77,12 @@ class Display extends React.Component {
                 </div>
                 <div className='grid-container glowing-text'>
                     <grid-item>
-                        <div id="pilots-list" className='glowing-text'>{pilotsListItems}</div>      
+                        <div id="pilots-list">{pilotsListItems}</div>      
                     </grid-item>
                     <grid-item>
                         <GarageDisplay mechas={this.state.game.agency.mechas}/>
-                        
-                        
-                        
-                        
-                        {/* {this.renderGarageDisplay('ABC')}
-                        {this.renderGarageDisplay('DEF')} */}
                     </grid-item>
                 </div>
-
-
-                
             </div>
             )
 

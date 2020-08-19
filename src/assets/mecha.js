@@ -9,4 +9,14 @@ export class Mecha {
     get mechaType() {return this._mechaType;}
     get idCode() {return this._idCode;}
     get pilot() {return this._pilot;}
+    setPilot(pilot) {
+        this._pilot = pilot;
+    }
+    hasPilot() {
+        if(this._pilot==null) {
+            return false;
+        } else {
+            return true;
+        }
+    }
 }

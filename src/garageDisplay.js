@@ -1,4 +1,5 @@
 import React from 'react';
+import './index.css';
 
 class GarageDisplay extends React.Component {
     // FUTURE: Optimize the way this interacts with index.js to avoid wasted re-renders?
@@ -20,18 +21,49 @@ class GarageDisplay extends React.Component {
 
 class MechaCard extends React.Component {
     render() {
-        return (
-            <button className='mecha-card'
-                onClick={() => 
-                    {
-                        alert(this.props.mecha.name)
-                    }
-                }
-            >
-                {this.props.mecha.name}
-            </button>
-        )
+        // If mecha has no pilot
+        if(!this.props.mecha.hasPilot()) {
+            return (
+                <div className="card">
+                    {/* img or icon */}
+                    <p>TEST</p>
+                    <div className="cardContainer">
+                        <p>{this.props.mecha.name}</p>
+                        <p>armor status</p>
+                    </div>
+                </div>
+            )
+        }
+        else {
+            return (
+                <button className="card">
+                    <p>{this.props.mecha.name}</p>
+                    <p style={{textIndent:'20px', fontSize:'50%', padding: '0px',}}>↳{this.props.mecha.pilot.fullName}</p>
+                </button>
+            )
+        }
+
+
+
+
+
     }
+
+
+
+    // render() {
+    //     return (
+    //         <button className='mecha-card'
+    //             onClick={() => 
+    //                 {
+    //                     alert(this.props.mecha.name)
+    //                 }
+    //             }
+    //         >
+    //             {this.props.mecha.name}
+    //         </button>
+    //     )
+    // }
 }
 
 export {GarageDisplay, MechaCard}
